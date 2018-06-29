@@ -134,6 +134,8 @@ function build_uri_string($uri_components){
 }
 
 /**
+ *  display_json_shortcode() - first test for reader from Server api. look at display_json for more information, will
+ *  delete later.
  *
  * @param $atts
  */
@@ -150,6 +152,18 @@ function display_json_shortcode($atts ){
 }
 add_shortcode( 'display_json_gen_table', 'display_json_shortcode' );
 
+/**
+ * display_json() - connects to sql database outside of the wordpress from C&M team. basic functionality of collecting
+ * json data collected from server.
+ *
+ * $atts - an array that contains args for the specific call to be produced. Current working example is a call to
+ * collect a json object that contains PEOPLE from the CREOL server. The function parses the information given by the
+ * function call, based on that call a url string is created to interact with the server using curl. see phpcURL library
+ * the curl function returns a json recognizable string. this is converted to a json-php object. From that information,
+ * the formatter prints the information in a pretty format for committee review at a later date. 
+ *
+ * @param $atts phpArray
+ */
 function display_json($atts ){
     $a = shortcode_atts( array(
         'base_uri' => 'https://api.creol.ucf.edu/test.aspx',
