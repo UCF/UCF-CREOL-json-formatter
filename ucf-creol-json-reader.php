@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: UCF-CREOL-SQL-Json-Reader
- * Version: 0.3
+ * Version: 0.3.1
  * Author: Raphael Miller for UCF CREOL
  * Description: This plugin collects information from a server with a json endpoint, and converts the json data to a
  * pretty format based on the Colleges requirements.
@@ -84,6 +84,12 @@ function curl_url($url){
     return $result;
 }
 
+/**
+ * display_img_card_deck() - displays a table using UCF colleges theme (Bootstrap) in order to produce a template for
+ * all values in the json string.
+ *
+ * @param $json jsonObj
+ */
 function display_img_card_deck($json){
 
     echo '<div class="container">';
@@ -129,6 +135,12 @@ function display_img_card_deck($json){
 
 }
 
+/**
+ * build_uri_string() - creates the uri string from the shortcode args given.
+ *
+ * @param $uri_components
+ * @return string
+ */
 function build_uri_string($uri_components){
     return $uri_components['base_uri'] . '?grpID=' . $uri_components['group'];
 }
@@ -160,7 +172,7 @@ add_shortcode( 'display_json_gen_table', 'display_json_shortcode' );
  * collect a json object that contains PEOPLE from the CREOL server. The function parses the information given by the
  * function call, based on that call a url string is created to interact with the server using curl. see phpcURL library
  * the curl function returns a json recognizable string. this is converted to a json-php object. From that information,
- * the formatter prints the information in a pretty format for committee review at a later date. 
+ * the formatter prints the information in a pretty format for committee review at a later date.
  *
  * @param $atts phpArray
  */
