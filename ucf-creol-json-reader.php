@@ -5,6 +5,7 @@
  * Author: Raphael Miller for UCF CREOL
  * Description: This plugin collects information from a server with a json endpoint, and converts the json data to a
  * pretty format based on the Colleges requirements.
+ * Github Theme URI: https://github.com/UCF/UCF-CREOL-json-formatter
  *
  * Requirements: UCF Colleges Theme. SQL Server with Json endpoint or SQL API with Json Endpoint
  */
