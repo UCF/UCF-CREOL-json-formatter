@@ -21,6 +21,13 @@ N/A
 
 ## Changelog ##
 
+### 0.4 ###
+
+* changed shortcode name to ucf-creol-people-directory.
+* set default to GrpID=1 and base_uri to SqltoJson.aspx.
+* reformatted image card block to house more data. 
+* linked images to respective older people homepage. 
+
 ### 0.3 ###
 * test push - making sure it works with the github uploader on Creol Cms Dev. 
 
@@ -43,3 +50,4 @@ N/A
 * Allow more functionality for various edge case solutions for the database. 
 * Comments
 * gulp this readme 
+* get email functionality 
