@@ -34,24 +34,24 @@ function SQL_DB_Connector(){
         $position );
 }
 
-function init_option_ui(){
-//    echo "<h1>SQL Json Reader</h1>"; //todo: look up wordpress directory settings
-//    echo '  <form action="ucf-creol-json-reader.php" method="post">
-//                URL to Json Feed<br>
-//                <input type="text" name="jsonURI">
-//                <input type="submit">
-//            </form>';
-    //$json_obj = get_json_from_url("https://api.creol.ucf.edu/test.aspx?GrpID=1");
-//    $result = curl_url("https://api.creol.ucf.edu/test.aspx?GrpID=1");
-//    //echo $result;
-//    $json_result = jsonifyier($result);
-//    foreach ($json_result as $json_arr){
-//        echo $json_arr['PeopleID'];
-//        echo $json_arr['FirstName'];
-//        echo $json_arr['LastName'];
-//    }
-
-}
+//function init_option_ui(){
+////    echo "<h1>SQL Json Reader</h1>"; //todo: look up wordpress directory settings
+////    echo '  <form action="ucf-creol-json-reader.php" method="post">
+////                URL to Json Feed<br>
+////                <input type="text" name="jsonURI">
+////                <input type="submit">
+////            </form>';
+//    //$json_obj = get_json_from_url("https://api.creol.ucf.edu/test.aspx?GrpID=1");
+////    $result = curl_url("https://api.creol.ucf.edu/test.aspx?GrpID=1");
+////    //echo $result;
+////    $json_result = jsonifyier($result);
+////    foreach ($json_result as $json_arr){
+////        echo $json_arr['PeopleID'];
+////        echo $json_arr['FirstName'];
+////        echo $json_arr['LastName'];
+////    }
+//
+//}
 
 /**
  * jsonifyier() - gets json string and decodes json into php object
@@ -110,23 +110,26 @@ function display_img_card_deck($json){
 //        echo '</div>';
 //        echo '</div>';
 
-        echo '
+        echo '<a href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='. $item['PeopleID'] .'">
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a class="" href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID=9117">
-                                        <img src="https://www.creol.ucf.edu/People/images/100x150Portrait/'.$item['PeopleID'].'.jpg"></a>
+                                        <a class="" href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='. $item['PeopleID'] .'">
+                                        <img src="https://www.creol.ucf.edu/People/images/200x300Portrait/'.$item['PeopleID'].'.jpg"></a>
                                     </div>
-                                    <a class="card-title alignright" href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID=9117">
-                                    <div class="col-sm-6">
-                                        <h3 class="">'.$item['FirstName'].'</h3>
-                                        <p class="">'.$item['LastName'].'</p>
-                                    </div>
-                                    </a>
+                                    <div class="col-sm-6">';
+                                       while(current($item)){
+                                           echo '<p>' . $item[key($item)] . '</p>';
+                                           next($item);
+                                       }
+                                echo '</div>
+                                    
                                 </div>
                             </div>
-                        </div>';
+                        </div>
+                    </a>';
+
     }
 
     echo '</div>';
@@ -143,7 +146,7 @@ function display_img_card_deck($json){
  * @return string
  */
 function build_uri_string($uri_components){
-    return $uri_components['base_uri'] . '?grpID=' . $uri_components['group'];
+    return $uri_components['base_uri'] . '?' . $uri_components['stored_procedure'] . '&' . 'GrpID=' . $uri_components['GrpID'];
 }
 
 /**
@@ -175,19 +178,29 @@ add_shortcode( 'display_json_gen_table', 'display_json_shortcode' );
  * the curl function returns a json recognizable string. this is converted to a json-php object. From that information,
  * the formatter prints the information in a pretty format for committee review at a later date.
  *
- * @param $atts phpArray
+ * @param $atts array
  */
-function display_json($atts ){
+function display_people_directory($atts ){
     $a = shortcode_atts( array(
-        'base_uri' => 'https://api.creol.ucf.edu/test.aspx',
-        'group' => 1,
-        'view' => ''
+        'base_uri' => 'https://api.creol.ucf.edu/SqltoJson.aspx',
+        'stored_procedure' => 'WWWDirectory',
+        'GrpID' => 2
     ), $atts );
 
     $result = build_uri_string($a);
+    //var_dump($result);
     $json_string = curl_url($result);
+    //var_dump($json_string);
     $json_obj = jsonifyier($json_string);
+    //var_dump($json_obj);
+//    foreach ($json_obj as $json_arr){
+//        while($key_val = current($json_arr)){
+//            echo $json_arr[key($json_arr)] . ' ';
+//            next($json_arr);
+//            echo '<br>';
+//        }
+//    }
     display_img_card_deck($json_obj);
 }
-add_shortcode( 'display_json', 'display_json' );
+add_shortcode( 'ucf-creol-people-directory', 'display_people_directory' );
 
