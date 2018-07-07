@@ -21,7 +21,7 @@ N/A
 
 ## Changelog ##
 
-### 0.4 ###
+### 0.3.3 ###
 
 * changed shortcode name to ucf-creol-people-directory.
 * set default to GrpID=1 and base_uri to SqltoJson.aspx.
