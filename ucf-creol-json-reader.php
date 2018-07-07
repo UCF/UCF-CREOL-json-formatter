@@ -86,55 +86,56 @@ function curl_url($url){
 }
 
 /**
- * display_img_card_deck() - displays a table using UCF colleges theme (Bootstrap) in order to produce a template for
- * all values in the json string.
+ * display_people() - displays a table using UCF colleges theme (Bootstrap) in order to produce a template for
+ * all values in the json string. This assumes an array with associative values that are specific to the query.
+ * contact please to refer to header address api.creol.ucf.edu/SqltoJson.aspx for more information.
  *
- * @param $json jsonObj
+ * @param $json array
  */
-function display_img_card_deck($json){
+function display_people($json){
 
-    echo '<div class="container">';
-    echo '<div class="row align-items-center">';
+    echo '<div class="row mx-5 my-5">';
+    foreach($json as $json_items){
+        echo '<div class="col-lg-6">';
+            echo '<div class="row align-items-top my-3 mx-3">';
+                echo '<div class="col-lg-6">';
+                if (key($json_items ) == 'PeopleID'){
+                    echo '<img src="https://www.creol.ucf.edu/People/images/200x300Portrait/'.$json_items['PeopleID'].'.jpg">';
+                } else {
+                    echo '<img src="https://www.creol.ucf.edu/People/images/100x150Portrait/NoImage.jpg">';
+                }
+                echo '</div>';
+                echo '<div class="col-lg-6">';
 
-    foreach ($json as $item){
-//        echo '<div class="col-sm-6">';
-//        echo '<div class="card-primary" >';
-//        echo '<a href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID=9117">';
-//        echo '<img class="" style="width: 25%"
-//            src="https://www.creol.ucf.edu/People/images/100x150Portrait/'; echo $item['PeopleID']; echo '.jpg">';
-//        echo '<div class="card-body>"';
-//        echo '<h5 class="card-title">'.$item['FirstName'].'</h5>';
-//        echo '<h5 class="card-title">'.$item['LastName'].'</h5>';
-//        echo '</a>';
-//        echo '</div>';
-//        echo '</div>';
-//        echo '</div>';
+                if(array_key_exists('FullName', $json_items)){
+                    echo '<h5>' .$json_items['FullName'] . '</h5>';
+                } else{
+                    echo '<h5>' . $json_items['FirstName'] . $json_items['LastName'] . '</h5>';
+                }
 
-        echo '<a href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='. $item['PeopleID'] .'">
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <a class="" href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='. $item['PeopleID'] .'">
-                                        <img src="https://www.creol.ucf.edu/People/images/200x300Portrait/'.$item['PeopleID'].'.jpg"></a>
-                                    </div>
-                                    <div class="col-sm-6">';
-                                       while(current($item)){
-                                           echo '<p>' . $item[key($item)] . '</p>';
-                                           next($item);
-                                       }
-                                echo '</div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </a>';
+                if(array_key_exists('Position', $json_items)){
+                    echo '<h6>' . $json_items['Position'] . '</h6>';
+                }
 
+                if(array_key_exists('Phone', $json_items)){
+                    echo '<p><strong>Phone:</strong> ' . $json_items['Phone'] . '</p>';
+                }
+
+                if(array_key_exists('Email', $json_items)){
+                    echo '<a style="text-decoration: none" href="mailto:'. $json_items['Email'] .'"><p>'
+                        . $json_items['Email'] . '</p></a>';
+                }
+
+                if(array_key_exists('Location', $json_items)){
+                    echo '<p>' . $json_items['Location'] . '</p>';
+                }
+
+                echo'</div>';
+            echo '</div>';
+        echo '</div>';
     }
 
     echo '</div>';
-    echo '</div>';
-
 
 
 }
@@ -164,7 +165,7 @@ function display_json_shortcode($atts ){
     $result = build_uri_string($a);
     $json_string = curl_url($result);
     $json_obj = jsonifyier($json_string);
-    display_img_card_deck($json_obj);
+    display_people($json_obj);
 }
 add_shortcode( 'display_json_gen_table', 'display_json_shortcode' );
 
@@ -200,7 +201,7 @@ function display_people_directory($atts ){
 //            echo '<br>';
 //        }
 //    }
-    display_img_card_deck($json_obj);
+    display_people($json_obj);
 }
 add_shortcode( 'ucf-creol-people-directory', 'display_people_directory' );
 
