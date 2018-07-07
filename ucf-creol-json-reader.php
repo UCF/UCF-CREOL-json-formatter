@@ -97,10 +97,12 @@ function display_people($json){
     echo '<div class="row mx-5 my-5">';
     foreach($json as $json_items){
         echo '<div class="col-lg-6">';
+
             echo '<div class="row align-items-top my-3 mx-3">';
                 echo '<div class="col-lg-6">';
                 if (key($json_items ) == 'PeopleID'){
-                    echo '<img src="https://www.creol.ucf.edu/People/images/200x300Portrait/'.$json_items['PeopleID'].'.jpg">';
+                    echo '<a href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='.$json_items['PeopleID'].'">
+                    <img src="https://www.creol.ucf.edu/People/images/200x300Portrait/'.$json_items['PeopleID'].'.jpg"></a>';
                 } else {
                     echo '<img src="https://www.creol.ucf.edu/People/images/100x150Portrait/NoImage.jpg">';
                 }
@@ -108,9 +110,11 @@ function display_people($json){
                 echo '<div class="col-lg-6">';
 
                 if(array_key_exists('FullName', $json_items)){
-                    echo '<h5>' .$json_items['FullName'] . '</h5>';
+                    echo '<a style=" color: #0a0a0a" href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='.$json_items['PeopleID'].'">';
+                    echo '<h5>' .$json_items['FullName'] . '</h5></a>';
                 } else{
-                    echo '<h5>' . $json_items['FirstName'] . $json_items['LastName'] . '</h5>';
+                    echo '<a href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='.$json_items['PeopleID'].'">';
+                    echo '<h5>' . $json_items['FirstName'] . $json_items['LastName'] . '</h5></a>';
                 }
 
                 if(array_key_exists('Position', $json_items)){
@@ -147,7 +151,7 @@ function display_people($json){
  * @return string
  */
 function build_uri_string($uri_components){
-    return $uri_components['base_uri'] . '?' . $uri_components['stored_procedure'] . '&' . 'GrpID=' . $uri_components['GrpID'];
+    return $uri_components['base_uri'] . '?' . $uri_components['stored_procedure'] . '&' . 'GrpID=' . $uri_components['grp_id'];
 }
 
 /**
@@ -185,7 +189,7 @@ function display_people_directory($atts ){
     $a = shortcode_atts( array(
         'base_uri' => 'https://api.creol.ucf.edu/SqltoJson.aspx',
         'stored_procedure' => 'WWWDirectory',
-        'GrpID' => 2
+        'grp_id' => 2
     ), $atts );
 
     $result = build_uri_string($a);
