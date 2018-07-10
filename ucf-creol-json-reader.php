@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: UCF-CREOL-SQL-Json-Reader
- * Version: 0.3.4
+ * Version: 0.3.5
  * Author: Raphael Miller for UCF CREOL
  * Description: This plugin collects information from a server with a json endpoint, and converts the json data to a
  * pretty format based on the Colleges requirements.
@@ -33,25 +33,6 @@ function SQL_DB_Connector(){
         $icon_url,
         $position );
 }
-
-//function init_option_ui(){
-////    echo "<h1>SQL Json Reader</h1>"; //todo: look up wordpress directory settings
-////    echo '  <form action="ucf-creol-json-reader.php" method="post">
-////                URL to Json Feed<br>
-////                <input type="text" name="jsonURI">
-////                <input type="submit">
-////            </form>';
-//    //$json_obj = get_json_from_url("https://api.creol.ucf.edu/test.aspx?GrpID=1");
-////    $result = curl_url("https://api.creol.ucf.edu/test.aspx?GrpID=1");
-////    //echo $result;
-////    $json_result = jsonifyier($result);
-////    foreach ($json_result as $json_arr){
-////        echo $json_arr['PeopleID'];
-////        echo $json_arr['FirstName'];
-////        echo $json_arr['LastName'];
-////    }
-//
-//}
 
 /**
  * jsonifyier() - gets json string and decodes json into php object
@@ -189,7 +170,8 @@ function display_people_directory($atts ){
     $a = shortcode_atts( array(
         'base_uri' => 'https://api.creol.ucf.edu/SqltoJson.aspx',
         'stored_procedure' => 'WWWDirectory',
-        'grp_id' => 2
+        'grp_id' => 2,
+        'show_fields' => true
     ), $atts );
 
     $result = build_uri_string($a);
@@ -197,15 +179,13 @@ function display_people_directory($atts ){
     $json_string = curl_url($result);
     //var_dump($json_string);
     $json_obj = jsonifyier($json_string);
-    //var_dump($json_obj);
-//    foreach ($json_obj as $json_arr){
-//        while($key_val = current($json_arr)){
-//            echo $json_arr[key($json_arr)] . ' ';
-//            next($json_arr);
-//            echo '<br>';
-//        }
-//    }
-    display_people($json_obj);
+
+
+    if($atts['show_fields'] == true) {
+        display_people($json_obj);
+    } else {
+        echo $json_string;
+    }
 }
 add_shortcode( 'ucf-creol-people-directory', 'display_people_directory' );
 
