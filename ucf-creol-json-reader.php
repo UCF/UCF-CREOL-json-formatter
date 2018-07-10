@@ -103,7 +103,7 @@ function display_people($json){
                 }
 
                 if(array_key_exists('Phone', $json_items)){
-                    echo '<p><strong>Phone:</strong> ' . $json_items['Phone'] . '</p>';
+                    echo '<p>' . $json_items['Phone'] . '</p>';
                 }
 
                 if(array_key_exists('Email', $json_items)){
