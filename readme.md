@@ -21,6 +21,11 @@ N/A
 
 ## Changelog ##
 
+### 0.4.0 ###
+
+* Added new shortcode for publications
+* Modified shortcode for bio data
+
 ### 0.3.3 ###
 
 * changed shortcode name to ucf-creol-people-directory.
