@@ -66,6 +66,62 @@ function curl_url($url){
     return $result;
 }
 
+function check_uri($url){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch , CURLOPT_RETURNTRANSFER, 1);
+    $data = curl_exec($ch);
+    $headers = curl_getinfo($ch);
+    curl_close($ch);
+
+    return $headers['http_code'];
+}
+
+function display_publications($json_obj){
+    $pub_base_url = 'https://www.creol.ucf.edu/Research/Publications/';
+
+    echo '<h4>Publications</h4>';
+    foreach ($json_obj as $json_item){
+        //echo $json_item['Authors'];
+        $pdf_uri = $pub_base_url . $json_item['PublicationID'] . '.pdf';
+        $pub_year = $json_item['PublicationYear'];
+        $pub_month = DateTime::createFromFormat('!m', $json_item['PublicationMonth']);
+        $month_name = $pub_month->format('F');
+        $pub_authors = $json_item['Authors'];
+        $pub_title = $json_item['Title'];
+        $pub_ref = $json_item['Reference'];
+
+        $check_url_status = check_uri($pdf_uri);
+        if($check_url_status == '200'){
+            $pdf_button = "<button class='button btn-primary'><a href=\"$pdf_uri\"><i class=\"fa fa-download\"></i>Download PDF</a></button>";
+        } else {
+            $pdf_button = '';
+        }
+
+            echo "
+                <div class='row'>
+                    <div class='col-sm-2'>
+                        $pdf_button
+                    </div>
+                    <div class='col-sm-2'>
+                        <h6>$pub_year, $month_name</h6>
+                    </div>
+                    <div class='col'>
+                        <p>Author(s): $pub_authors</p>
+                        <p>Publication Title: $pub_title</p>
+                        <p>Journal/ Reference: $pub_ref</p>
+                    </div>
+                </div>
+                <p></p>
+            ";
+
+            //echo "$key = $value<br><br>";
+
+
+    }
+}
+
 /**
  * display_people() - displays a table using UCF colleges theme (Bootstrap) in order to produce a template for
  * all values in the json string. This assumes an array with associative values that are specific to the query.
@@ -215,25 +271,26 @@ add_shortcode( 'ucf-creol-people-directory', 'display_people_directory' );
 /**
  * ucf_creol_publications-shortcode() - shortcode gen for pub shortcode
  *
- * @param $atts
+ * @param $args
  */
-function ucf_creol_publications_shortcode($atts ){
+function ucf_creol_publications_shortcode($args ){
     $a = shortcode_atts( array(
         'base_uri' => 'https://api.creol.ucf.edu/SqltoJson.aspx',
         'stored_procedure' => 'WWWPublications',
-        'TypeList' => 3,
+        'TypeList' => '3',      //STRING sep with commas.
         'Year' => 0,
-        'PeopleID' => 0,
+        'peopleid' => 0,
         'page' => 1,
-        'pageSize' => 30
-    ), $atts );
+        'pageSize' => 20
+    ), $args );
 
 
     $result = build_uri_string_publications($a);
     $json_string = curl_url($result);
-    //var_dump($json_string);
     $json_obj = jsonifyier($json_string);
-    var_dump($json_obj);
+    //var_dump($json_obj);
+
+    display_publications($json_obj);
 }
 add_shortcode( 'ucf-creol-pub', 'ucf_creol_publications_shortcode' );
 
