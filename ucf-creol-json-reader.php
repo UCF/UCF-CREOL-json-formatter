@@ -135,6 +135,11 @@ function build_uri_string_directory($uri_components){
     return $uri_components['base_uri'] . '?' . $uri_components['stored_procedure'] . '&' . 'GrpID=' . $uri_components['grp_id'];
 }
 
+/**
+ * build_uri_string_publications() - builds the url string from the shortcode arguments list.
+ * @param $uri_components
+ * @return string
+ */
 function build_uri_string_publications($uri_components){
     //var_dump($uri_components);
     $url_concat = '';
@@ -150,7 +155,6 @@ function build_uri_string_publications($uri_components){
             $url_concat = $url_concat . $k . '=' . $v . '&';
         }
     }
-    
     return $url_concat;
 }
 
@@ -208,7 +212,12 @@ function display_people_directory($atts ){
 }
 add_shortcode( 'ucf-creol-people-directory', 'display_people_directory' );
 
-function ucf_creol_bio_shortcode($atts ){
+/**
+ * ucf_creol_publications-shortcode() - shortcode gen for pub shortcode
+ *
+ * @param $atts
+ */
+function ucf_creol_publications_shortcode($atts ){
     $a = shortcode_atts( array(
         'base_uri' => 'https://api.creol.ucf.edu/SqltoJson.aspx',
         'stored_procedure' => 'WWWPublications',
@@ -221,7 +230,10 @@ function ucf_creol_bio_shortcode($atts ){
 
 
     $result = build_uri_string_publications($a);
-    //var_dump($result);
+    $json_string = curl_url($result);
+    //var_dump($json_string);
+    $json_obj = jsonifyier($json_string);
+    var_dump($json_obj);
 }
-add_shortcode( 'ucf-creol-bio', 'ucf_creol_bio_shortcode' );
+add_shortcode( 'ucf-creol-pub', 'ucf_creol_publications_shortcode' );
 
