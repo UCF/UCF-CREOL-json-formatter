@@ -131,8 +131,27 @@ function display_people($json){
  * @param $uri_components
  * @return string
  */
-function build_uri_string($uri_components){
+function build_uri_string_directory($uri_components){
     return $uri_components['base_uri'] . '?' . $uri_components['stored_procedure'] . '&' . 'GrpID=' . $uri_components['grp_id'];
+}
+
+function build_uri_string_publications($uri_components){
+    //var_dump($uri_components);
+    $url_concat = '';
+    $last_element = end($uri_components);
+    foreach ($uri_components as $k => $v){
+        if($k == 'base_uri'){
+            $url_concat = $url_concat . $v . "?";
+        } else if($k == 'stored_procedure'){
+            $url_concat = $url_concat . $v . '&';
+        } else if($v == $last_element){
+            $url_concat = $url_concat . $k . '=' . $v;
+        } else {
+            $url_concat = $url_concat . $k . '=' . $v . '&';
+        }
+    }
+    
+    return $url_concat;
 }
 
 /**
@@ -147,7 +166,7 @@ function display_json_shortcode($atts ){
         'group' => 1
     ), $atts );
 
-    $result = build_uri_string($a);
+    $result = build_uri_string_directory($a);
     $json_string = curl_url($result);
     $json_obj = jsonifyier($json_string);
     display_people($json_obj);
@@ -174,7 +193,7 @@ function display_people_directory($atts ){
         'show_fields' => true
     ), $atts );
 
-    $result = build_uri_string($a);
+    $result = build_uri_string_directory($a);
     //var_dump($result);
     $json_string = curl_url($result);
     //var_dump($json_string);
@@ -192,26 +211,17 @@ add_shortcode( 'ucf-creol-people-directory', 'display_people_directory' );
 function ucf_creol_bio_shortcode($atts ){
     $a = shortcode_atts( array(
         'base_uri' => 'https://api.creol.ucf.edu/SqltoJson.aspx',
-        'stored_procedure' => 'WWWDirectory',
-        'type_list' => 3,
-        'year' => 0,
+        'stored_procedure' => 'WWWPublications',
+        'TypeList' => 3,
+        'Year' => 0,
         'PeopleID' => 0,
         'page' => 1,
-        'page_size' => 30
+        'pageSize' => 30
     ), $atts );
 
-    $result = build_uri_string($a);
+
+    $result = build_uri_string_publications($a);
     //var_dump($result);
-    $json_string = curl_url($result);
-    //var_dump($json_string);
-    $json_obj = jsonifyier($json_string);
-
-
-    if($atts['show_fields'] == true) {
-        display_people($json_obj);
-    } else {
-        echo $json_string;
-    }
 }
 add_shortcode( 'ucf-creol-bio', 'ucf_creol_bio_shortcode' );
 
