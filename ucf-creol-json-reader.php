@@ -92,8 +92,11 @@ function display_publications($json_obj){
         $pub_title = $json_item['Title'];
         $pub_ref = $json_item['Reference'];
 
-        $check_url_status = check_uri($pdf_uri);
-        if($check_url_status == '200'){
+        $header = get_headers($pdf_uri, 1);
+        //var_dump($header['Content-Type']);
+
+        //$check_url_status = check_uri($pdf_uri);
+        if($header['Content-Type'] == 'application/pdf'){
             $pdf_button = "<button class='button btn-primary'><a href=\"$pdf_uri\"><i class=\"fa fa-download\"></i>Download PDF</a></button>";
         } else {
             $pdf_button = '';
@@ -281,7 +284,7 @@ function ucf_creol_publications_shortcode($args ){
         'Year' => 0,
         'peopleid' => 0,
         'page' => 1,
-        'pageSize' => 20
+        'pageSize' => 10
     ), $args );
 
 
