@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: UCF-CREOL-SQL-Json-Reader
- * Version: 0.4.0
+ * Version: 0.4.1
  * Author: Raphael Miller for UCF CREOL
  * Description: This plugin collects information from a server with a json endpoint, and converts the json data to a
  * pretty format based on the Colleges requirements.
@@ -202,18 +202,22 @@ function build_uri_string_directory($uri_components){
 function build_uri_string_publications($uri_components){
     //var_dump($uri_components);
     $url_concat = '';
-    $last_element = end($uri_components);
+    end($uri_components);
+    $last_element = key($uri_components);
+    //echo $last_element;
     foreach ($uri_components as $k => $v){
         if($k == 'base_uri'){
             $url_concat = $url_concat . $v . "?";
         } else if($k == 'stored_procedure'){
             $url_concat = $url_concat . $v . '&';
-        } else if($v == $last_element){
+        } else if($k == $last_element){
             $url_concat = $url_concat . $k . '=' . $v;
         } else {
             $url_concat = $url_concat . $k . '=' . $v . '&';
         }
     }
+
+    //echo $url_concat;
     return $url_concat;
 }
 
@@ -282,18 +286,45 @@ function ucf_creol_publications_shortcode($args ){
         'stored_procedure' => 'WWWPublications',
         'TypeList' => '3',      //STRING sep with commas.
         'Year' => 0,
-        'peopleid' => 0,
-        'page' => 1,
-        'pageSize' => 10
+        'PeopleID' => 0,
+        'Page' => 1,
+        'PageSize' => 10
     ), $args );
 
-
+    //var_dump($a);
+    $a = unlower($a, $args);
+    var_dump($a);
     $result = build_uri_string_publications($a);
+    //var_dump($result);
     $json_string = curl_url($result);
     $json_obj = jsonifyier($json_string);
-    //var_dump($json_obj);
+    //var_dump($json_string);
 
     display_publications($json_obj);
 }
 add_shortcode( 'ucf-creol-pub', 'ucf_creol_publications_shortcode' );
+
+function unlower($array, $args){
+    if(isset($args['peopleid'])){
+        $array['PeopleID'] = $args['peopleid'];
+    }
+
+    if(isset($args['typelist'])){
+        $array['TypeList'] = $args['typelist'];
+    }
+
+    if(isset($args['year'])){
+        $array['Year'] = $args['year'];
+    }
+
+    if(isset($args['page'])){
+        $array['Page'] = $args['page'];
+    }
+
+    if(isset($args['pagesize'])){
+        $array['PageSize'] = $args['pagesize'];
+    }
+
+    return $array;
+}
 
