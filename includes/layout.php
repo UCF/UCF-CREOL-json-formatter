@@ -83,7 +83,7 @@ function display_publications($json_obj){
         if($header['Content-Type'] == 'application/pdf'){
             $pdf_button = "<button class='button btn-primary'><a href=\"$pdf_uri\">Download PDF</a></button>";
         } else {
-            $pdf_button = '';
+            $pdf_button = '<button class="disabled">PDF not available</button>';
         }
 
         echo "
@@ -106,4 +106,8 @@ function display_publications($json_obj){
             ";
         //echo "$key = $value<br><br>";
     }
+}
+
+function display_search(){
+
 }
