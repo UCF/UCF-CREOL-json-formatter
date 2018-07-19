@@ -8,16 +8,23 @@
 
 /**
  * build_uri_string_publications() - builds the url string from the shortcode arguments list.
- * @param $uri_components
+ * @param $shortcode_defaults
  * @return string
  */
-function build_uri_string_publications($uri_components){
-    //var_dump($uri_components);
+function build_uri_string_publications($shortcode_defaults, $shortcode_args){
     $url_concat = '';
-    end($uri_components);
-    $last_element = key($uri_components);
-    //echo $last_element;
-    foreach ($uri_components as $k => $v){
+    $arr = array(key($shortcode_defaults) => $shortcode_defaults['base_uri']) + $shortcode_args;
+    //var_dump($arr);
+    end($arr);
+    $last_element = key($arr);
+
+    if($arr['stored_procedure'] == 'WWWDirectory'){
+        if(!array_key_exists('grpid', $arr)){
+            return 'argument expects group id value';
+        }
+    }
+
+    foreach ($arr as $k => $v){
         if($k == 'base_uri'){
             $url_concat = $url_concat . $v . "?";
         } else if($k == 'stored_procedure'){

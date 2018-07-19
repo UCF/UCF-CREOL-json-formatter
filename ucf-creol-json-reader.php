@@ -120,20 +120,21 @@ function ucf_creol_generic_shortcode($args ){
     $a = shortcode_atts( array(
         'base_uri' => 'https://api.creol.ucf.edu/SqltoJson.aspx',
         'stored_procedure' => 'WWWPublications',
-        'typelist' => '3',      //STRING sep with commas.
-        'year' => 0,
-        'peopleid' => 0,
-        'page' => 1,
-        'pagesize' => 3,
-        'grpid' => 0,
-        'layout' => 'pub'
+//        'typelist' => '3',      //STRING sep with commas.
+//        'year' => 0,
+//        'peopleid' => 0,
+//        'page' => 1,
+//        'pagesize' => 3,
+//        'grpid' => 0,
+//        'layout' => 'pub'
     ), $args );
 
-    $result = build_uri_string_publications($a);
-    $json_string = curl_url($result);
-    $json_obj = jsonifyier($json_string);
-    $_POST['json_obj'] = $json_obj;
-    display_publications($json_obj);
+    $result = build_uri_string_publications($a, $args);
+    echo $result . '<br>';
+//    $json_string = curl_url($result);
+//    $json_obj = jsonifyier($json_string);
+//    $_POST['json_obj'] = $json_obj;
+//    display_publications($json_obj);
 }
 add_shortcode( 'ucf-creol', 'ucf_creol_generic_shortcode' );
 
