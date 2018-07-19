@@ -21,6 +21,10 @@ N/A
 
 ## Changelog ##
 
+### 0.4.3 ###
+
+* added generic plugin shortcode to list of shortcode. will deprecate others in future version.   
+
 ### 0.4.0 ###
 
 * Added new shortcode for publications
