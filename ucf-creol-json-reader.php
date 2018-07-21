@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: UCF-CREOL-SQL-Json-Reader
- * Version: 0.4.3
+ * Version: 0.4.4
  * Author: Raphael Miller for UCF CREOL
  * Description: This plugin collects information from a server with a json endpoint, and converts the json data to a
  * pretty format based on the Colleges requirements.
@@ -53,7 +53,7 @@ function display_json_shortcode($atts ){
     $result = build_uri_string_directory($a);
     $json_string = curl_url($result);
     $json_obj = jsonifyier($json_string);
-    display_people($json_obj);
+    layout_people($json_obj);
 }
 add_shortcode( 'display_json_gen_table', 'display_json_shortcode' );
 
@@ -85,7 +85,7 @@ function ucf_creol_people_directory_shortcode($atts ){
 
 
     if($atts['show_fields'] == true) {
-        display_people($json_obj);
+        layout_people($json_obj);
     } else {
         echo $json_string;
     }
@@ -112,7 +112,7 @@ function ucf_creol_publications_shortcode($args ){
     $json_string = curl_url($result);
     $json_obj = jsonifyier($json_string);
     $_POST['json_obj'] = $json_obj;
-    display_publications($json_obj);
+    layout_publications($json_obj);
 }
 add_shortcode( 'ucf-creol-pub', 'ucf_creol_publications_shortcode' );
 
@@ -130,11 +130,16 @@ function ucf_creol_generic_shortcode($args ){
     ), $args );
 
     $result = build_uri_string_publications($a, $args);
-    echo $result . '<br>';
-//    $json_string = curl_url($result);
-//    $json_obj = jsonifyier($json_string);
+    //echo $result . '<br>';
+    $json_string = curl_url($result);
+    $json_obj = jsonifyier($json_string);
+    //var_dump($json_obj);
+    $content_type = check_header($result);
+    //echo $content_type;
+    //var_dump($json_obj);
 //    $_POST['json_obj'] = $json_obj;
-//    display_publications($json_obj);
+    //display_publications($json_obj);
+    layout_people($json_obj);
 }
 add_shortcode( 'ucf-creol', 'ucf_creol_generic_shortcode' );
 

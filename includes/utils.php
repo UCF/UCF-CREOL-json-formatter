@@ -11,6 +11,9 @@
  * @param $shortcode_defaults
  * @return string
  */
+
+
+
 function build_uri_string_publications($shortcode_defaults, $shortcode_args){
     $url_concat = '';
     $arr = array(key($shortcode_defaults) => $shortcode_defaults['base_uri']) + $shortcode_args;
@@ -62,6 +65,20 @@ function check_uri($url){
     return $headers['http_code'];
 }
 
+function check_header($url){
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_HEADER => true,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_URL => $url
+    ));
+    curl_exec($curl);
+    $content_type = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
+    curl_close($curl);
+    return $content_type;
+
+}
+
 /**
  * curl_url() - creates a connection to url and returns the contents of curl. expected json string.
  *
@@ -85,5 +102,7 @@ function curl_url($url){
 }
 
 function jsonifyier($result){
+    //var_dump(json_decode($result, JSON_PRETTY_PRINT));
+    //echo json_last_error();
     return json_decode($result, JSON_PRETTY_PRINT);
 }

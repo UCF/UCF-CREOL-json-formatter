@@ -13,56 +13,43 @@
  *
  * @param $json array
  */
-function display_people($json){
 
-    echo '<div class="row mx-5 my-5">';
-    foreach($json as $json_items){
-        echo '<div class="col-lg-6">';
 
-        echo '<div class="row align-items-top my-3 mx-3">';
-        echo '<div class="col-lg-6">';
-        if (key($json_items ) == 'PeopleID'){
-            echo '<a href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='.$json_items['PeopleID'].'">
-                    <img src="https://www.creol.ucf.edu/People/images/200x300Portrait/'.$json_items['PeopleID'].'.jpg"></a>';
-        } else {
-            echo '<img src="https://www.creol.ucf.edu/People/images/100x150Portrait/NoImage.jpg">';
-        }
-        echo '</div>';
-        echo '<div class="col-lg-6">';
 
-        if(array_key_exists('FullName', $json_items)){
-            echo '<a style=" color: #0a0a0a" href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='.$json_items['PeopleID'].'">';
-            echo '<h5>' .$json_items['FullName'] . '</h5></a>';
-        } else{
-            echo '<a href="https://www.creol.ucf.edu/People/Details.aspx?PeopleID='.$json_items['PeopleID'].'">';
-            echo '<h5>' . $json_items['FirstName'] . $json_items['LastName'] . '</h5></a>';
-        }
+function layout_people($json){
 
-        if(array_key_exists('Position', $json_items)){
-            echo '<h6>' . $json_items['Position'] . '</h6>';
-        }
+    //offline debug
+    $get_json_sample = file_get_contents( __DIR__ . '/..');
+    $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
+    $json = $parse_json;
 
-        if(array_key_exists('Phone', $json_items)){
-            echo '<p>' . $json_items['Phone'] . '</p>';
-        }
+    echo "<div class='row'>";
+    foreach ($json as $item){
+        $photo_url = 'https://www.creol.ucf.edu/People/images/200x300Portrait/' . $item['PeopleID'] . '.jpg';
+        $site_url = 'https://www.creol.ucf.edu/People/Details.aspx?PeopleID=' . $item['PeopleID'];
+        $name = $item['FullName'];
+        $room_no = $item['Location'];
+        $email = $item['Email'];
+        $phone = $item['Phone'];
+        $position = $item['Position'];
 
-        if(array_key_exists('Email', $json_items)){
-            echo '<a style="text-decoration: none" href="mailto:'. $json_items['Email'] .'"><p>'
-                . $json_items['Email'] . '</p></a>';
-        }
-
-        if(array_key_exists('Location', $json_items)){
-            echo '<p>' . $json_items['Location'] . '</p>';
-        }
-
-        echo'</div>';
-        echo '</div>';
-        echo '</div>';
+        echo "
+                <div class='col-lg-3 mb-3'>
+                    <a href='$site_url'><img class='card' src='$photo_url'></a>
+                </div>
+                <div class='col-lg-3'>
+                    <h5>$name</h5>
+                    <h6>$position</h6>
+                    <p>$room_no</p>
+                    <p>$phone</p>
+                    <a href='mailto:$email'><p>$email</p></a>
+                </div>
+        ";
     }
     echo '</div>';
 }
 
-function display_publications($json_obj){
+function layout_publications($json_obj){
     $pub_base_url = 'https://www.creol.ucf.edu/Research/Publications/';
 
     echo '<h4>Publications</h4>';
@@ -109,5 +96,13 @@ function display_publications($json_obj){
 }
 
 function display_search(){
+
+}
+
+function non_image_layout(){
+
+}
+
+function image_layout(){
 
 }
