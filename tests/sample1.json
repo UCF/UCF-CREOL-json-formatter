@@ -1,0 +1,316 @@
+[{
+  "PeopleID": 22014,
+  "LastName": "Abouraddy",
+  "FirstName": "Ayman",
+  "FullName": "Dr. Ayman Abouraddy",
+  "Location": "CREOL A116",
+  "Phone": "407-823-6809",
+  "Email": "raddy@creol.ucf.edu",
+  "Position": "Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 11600,
+  "LastName": "Amezcua Correa",
+  "FirstName": "Rodrigo",
+  "FullName": "Dr. Rodrigo Amezcua Correa",
+  "Location": "CREOL A118",
+  "Phone": "407-823-6853",
+  "Email": "r.amezcua@creol.ucf.edu",
+  "Position": "Assistant Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 15806,
+  "LastName": "Argenti",
+  "FirstName": "Luca",
+  "FullName": "Dr. Luca Argenti",
+  "Location": "PSB 304",
+  "Phone": "(+1) 407-2599917",
+  "Email": "luca.argenti@ucf.edu",
+  "Position": "Assistant Professor of Physics, Optics \u0026 Photonics"
+}, {
+  "PeopleID": 10673,
+  "LastName": "Chang",
+  "FirstName": "Zenghu",
+  "FullName": "Dr. Zenghu Chang",
+  "Location": "PS464",
+  "Phone": "407-823-4442",
+  "Email": "Zenghu.Chang@ucf.edu",
+  "Position": "University Trustee Chair, Pegasus and Distinguished Professor of Physics, Optics \u0026 Photonics"
+}, {
+  "PeopleID": 356,
+  "LastName": "Christodoulides",
+  "FirstName": "Demetrios",
+  "FullName": "Dr. Demetrios Christodoulides",
+  "Location": "CREOL 210",
+  "Phone": "407-882-0074",
+  "Email": "demetri@creol.ucf.edu",
+  "Position": "Pegasus Professor of Optics \u0026 Photonics/Cobb Family Endowed Chair"
+}, {
+  "PeopleID": 296,
+  "LastName": "Delfyett",
+  "FirstName": "Peter J.",
+  "FullName": "Dr. Peter J. Delfyett",
+  "Location": "CREOL 272",
+  "Phone": "407-823-6812",
+  "Email": "delfyett@creol.ucf.edu",
+  "Position": "University Trustee Chair \u0026 Pegasus Professor of Optics \u0026 Photonics, ECE \u0026 Physics; Director, Townes Laser Institute"
+}, {
+  "PeopleID": 4508,
+  "LastName": "Deppe",
+  "FirstName": "Dennis",
+  "FullName": "Dr. Dennis Deppe",
+  "Location": "CREOL A121",
+  "Phone": "407-823-6870",
+  "Email": "ddeppe@creol.ucf.edu",
+  "Position": "FPCE Endowed Chair \u0026 Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 297,
+  "LastName": "Dogariu",
+  "FirstName": "Aristide",
+  "FullName": "Dr. Aristide Dogariu",
+  "Location": "CREOL A111",
+  "Phone": "407-823-6839",
+  "Email": "adogariu@creol.ucf.edu",
+  "Position": "Pegasus Professor of Optics \u0026 Photonics/FPCE"
+}, {
+  "PeopleID": 18123,
+  "LastName": "Driggers",
+  "FirstName": "Ronald",
+  "FullName": "Dr. Ronald Driggers",
+  "Location": "CREOL A315",
+  "Phone": "407-823-0323",
+  "Email": "Ron.Driggers@creol.ucf.edu",
+  "Position": "Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 9235,
+  "LastName": "Fathpour",
+  "FirstName": "Sasan",
+  "FullName": "Dr. Sasan Fathpour",
+  "Location": "CREOL A216",
+  "Phone": "407-823-6961",
+  "Email": "fathpour@creol.ucf.edu",
+  "Position": "Associate Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 11608,
+  "LastName": "Gaume",
+  "FirstName": "Romain",
+  "FullName": "Dr. Romain Gaume",
+  "Location": "CREOL 172",
+  "Phone": "407-823-5683",
+  "Email": "gaume@creol.ucf.edu",
+  "Position": "Assistant Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 15812,
+  "LastName": "Gelfand",
+  "FirstName": "Ryan",
+  "FullName": "Dr. Ryan Gelfand",
+  "Location": "CREOL A213",
+  "Phone": "407-823-1385",
+  "Email": "ryan5@creol.ucf.edu",
+  "Position": "Assistant Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 326,
+  "LastName": "Glebov",
+  "FirstName": "Leonid B.",
+  "FullName": "Dr. Leonid B. Glebov",
+  "Location": "CREOL 285",
+  "Phone": "407-823-6983",
+  "Email": "lbglebov@creol.ucf.edu",
+  "Position": "Research Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 300,
+  "LastName": "Hagan",
+  "FirstName": "David J.",
+  "FullName": "Dr. David J. Hagan",
+  "Location": "CREOL 209",
+  "Phone": "407-823-6817",
+  "Email": "hagan@creol.ucf.edu",
+  "Position": "Associate Dean for Academic Programs \u0026 Pegasus Professor of Optics \u0026 Photonics, Physics"
+}, {
+  "PeopleID": 15828,
+  "LastName": "Han",
+  "FirstName": "Kyu Young",
+  "FullName": "Dr. Kyu Young Han",
+  "Location": "CREOL 162",
+  "Phone": "407-823-6922",
+  "Email": "kyhan@creol.ucf.edu",
+  "Position": "Assistant Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 303,
+  "LastName": "Kar",
+  "FirstName": "Aravinda",
+  "FullName": "Dr. Aravinda Kar",
+  "Location": "CREOL 284",
+  "Phone": "407-823-6921",
+  "Email": "akar@creol.ucf.edu",
+  "Position": "Professor of Optics \u0026 Photonics, MMAE, ECE and Physics"
+}, {
+  "PeopleID": 12607,
+  "LastName": "Khajavikhan",
+  "FirstName": "Mercedeh",
+  "FullName": "Dr. Mercedeh Khajavikhan",
+  "Location": "CREOL 275",
+  "Phone": "407-823-6829",
+  "Email": "mercedeh@creol.ucf.edu",
+  "Position": "Assistant Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 3407,
+  "LastName": "Kik",
+  "FirstName": "Pieter G.",
+  "FullName": "Dr. Pieter G. Kik",
+  "Location": "CREOL 270",
+  "Phone": "407-823-4622",
+  "Email": "kik@creol.ucf.edu",
+  "Position": "Associate Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 3421,
+  "LastName": "Kuebler",
+  "FirstName": "Stephen",
+  "FullName": "Dr. Stephen Kuebler",
+  "Location": "Phys Sciences 347",
+  "Phone": "407-823-3720",
+  "Email": "Stephen.Kuebler@ucf.edu",
+  "Position": "Associate Professor of Chemistry, Optics \u0026 Photonics"
+}, {
+  "PeopleID": 304,
+  "LastName": "Li",
+  "FirstName": "Guifang",
+  "FullName": "Dr. Guifang Li",
+  "Location": "CREOL 278",
+  "Phone": "407-823-6811",
+  "Email": "li@creol.ucf.edu",
+  "Position": "Professor of Optics \u0026 Photonics, Physics, ECE"
+}, {
+  "PeopleID": 305,
+  "LastName": "LiKamWa",
+  "FirstName": "Patrick L.",
+  "FullName": "Dr. Patrick L. LiKamWa",
+  "Location": "CREOL A211",
+  "Phone": "407-823-6816",
+  "Email": "patrick@creol.ucf.edu",
+  "Position": "Professor of Optics \u0026 Photonics, ECE"
+}, {
+  "PeopleID": 306,
+  "LastName": "Moharam",
+  "FirstName": "M. G. \"Jim\"",
+  "FullName": "Dr. M. G. \"Jim\" Moharam",
+  "Location": "CREOL 274",
+  "Phone": "407-823-6833",
+  "Email": "moharam@creol.ucf.edu",
+  "Position": "Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 14256,
+  "LastName": "Pang",
+  "FirstName": "Shuo \"Sean\"",
+  "FullName": "Dr. Shuo \"Sean\" Pang",
+  "Location": "CREOL 276",
+  "Phone": "407-823-6869",
+  "Email": "pang@creol.ucf.edu",
+  "Position": "Assistant Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 17608,
+  "LastName": "Patel",
+  "FirstName": "Kumar",
+  "FullName": "Dr. Kumar Patel",
+  "Location": "Pranalytica, Inc.",
+  "Phone": null,
+  "Email": "Chandra.Patel@ucf.edu",
+  "Position": "University Distinguished Professor"
+}, {
+  "PeopleID": 15801,
+  "LastName": "Renshaw",
+  "FirstName": "C. Kyle",
+  "FullName": "Dr. C. Kyle Renshaw",
+  "Location": "CREOL A209",
+  "Phone": "407-823-2807",
+  "Email": "krenshaw@creol.ucf.edu",
+  "Position": "Assistant Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 307,
+  "LastName": "Richardson",
+  "FirstName": "Kathleen A.",
+  "FullName": "Dr. Kathleen A. Richardson",
+  "Location": "CREOL A110",
+  "Phone": "407-823-6815",
+  "Email": "kcr@creol.ucf.edu",
+  "Position": "Pegasus Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 308,
+  "LastName": "Richardson",
+  "FirstName": "Martin C.",
+  "FullName": "Dr. Martin C. Richardson",
+  "Location": "CREOL 126",
+  "Phone": "407-823-6819",
+  "Email": "mcr@creol.ucf.edu",
+  "Position": "Pegasus Professor and University Trustee Chair, Northrop Grumman Prof of X-ray Photonics; Prof of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 8905,
+  "LastName": "Saleh",
+  "FirstName": "Bahaa E. A.",
+  "FullName": "Dr. Bahaa E. A. Saleh",
+  "Location": "CREOL 207",
+  "Phone": "407-882-3326",
+  "Email": "besaleh@creol.ucf.edu",
+  "Position": "Dean \u0026 Director, Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 4537,
+  "LastName": "Schoenfeld",
+  "FirstName": "Winston V.",
+  "FullName": "Dr. Winston V. Schoenfeld",
+  "Location": "CREOL A215",
+  "Phone": "(407) 823-6898",
+  "Email": "winston@creol.ucf.edu",
+  "Position": "Professor of Optics \u0026 Photonics \u0026 Director, Florida Solar Energy Center (FSEC)"
+}, {
+  "PeopleID": 10068,
+  "LastName": "Schülzgen",
+  "FirstName": "Axel",
+  "FullName": "Dr. Axel Schülzgen",
+  "Location": "CREOL A115",
+  "Phone": "407-823-1746",
+  "Email": "axel@creol.ucf.edu",
+  "Position": "Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 313,
+  "LastName": "Soileau",
+  "FirstName": "M.J.",
+  "FullName": "Dr. M.J. Soileau",
+  "Location": "CREOL A219",
+  "Phone": "407-823-5539",
+  "Email": "MJ@ucf.edu",
+  "Position": "University Distinguished Professor of Optics \u0026 Photonics, ECE \u0026 Physics"
+}, {
+  "PeopleID": 316,
+  "LastName": "Van Stryland",
+  "FirstName": "Eric W.",
+  "FullName": "Dr. Eric W. Van Stryland",
+  "Location": "CREOL 271",
+  "Phone": "407-823-6835",
+  "Email": "ewvs@creol.ucf.edu",
+  "Position": "University Trustee Chair, Pegasus Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 9927,
+  "LastName": "Vodopyanov",
+  "FirstName": "Konstantin L.",
+  "FullName": "Dr. Konstantin L. Vodopyanov",
+  "Location": "CREOL A113",
+  "Phone": "407-823-6818",
+  "Email": "vodopyanov@creol.ucf.edu",
+  "Position": "21st Century Scholar Chair \u0026 Professor of Optics \u0026 Photonics, and Physics"
+}, {
+  "PeopleID": 318,
+  "LastName": "Wu",
+  "FirstName": "Shin-Tson",
+  "FullName": "Dr. Shin-Tson Wu",
+  "Location": "CREOL 280",
+  "Phone": "407-823-4763",
+  "Email": "swu@creol.ucf.edu",
+  "Position": "Pegasus Professor of Optics \u0026 Photonics"
+}, {
+  "PeopleID": 17670,
+  "LastName": "Yu",
+  "FirstName": "Xiaoming",
+  "FullName": "Dr. Xiaoming Yu",
+  "Location": "CREOL 273",
+  "Phone": "(407) 823-6872",
+  "Email": "yux@creol.ucf.edu",
+  "Position": "Assistant Professor of Optics \u0026 Photonics"
+}]

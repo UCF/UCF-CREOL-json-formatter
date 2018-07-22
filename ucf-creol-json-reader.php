@@ -130,16 +130,24 @@ function ucf_creol_generic_shortcode($args ){
     ), $args );
 
     $result = build_uri_string_publications($a, $args);
-    //echo $result . '<br>';
     $json_string = curl_url($result);
     $json_obj = jsonifyier($json_string);
-    //var_dump($json_obj);
-    $content_type = check_header($result);
-    //echo $content_type;
-    //var_dump($json_obj);
-//    $_POST['json_obj'] = $json_obj;
-    //display_publications($json_obj);
-    layout_people($json_obj);
+
+    var_dump($args);
+
+    switch ($args['stored_procedure']){
+        case "WWWPublications":
+            layout_publications($json_obj);
+            break;
+        case "WWWDIrectory":
+            layout_people($json_obj);
+            break;
+        default:
+            echo 'Error: stored procedure is missing or invalid';
+            break;
+    }
+
+    //layout_people($json_obj);
 }
 add_shortcode( 'ucf-creol', 'ucf_creol_generic_shortcode' );
 

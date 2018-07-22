@@ -19,9 +19,12 @@
 function layout_people($json){
 
     //offline debug
-    $get_json_sample = file_get_contents( __DIR__ . '/..');
+    $path = dirname(__DIR__);
+    $get_json_sample = file_get_contents( $path . '/tests/sample1.json');
     $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
     $json = $parse_json;
+
+
 
     echo "<div class='row'>";
     foreach ($json as $item){
@@ -32,6 +35,11 @@ function layout_people($json){
         $email = $item['Email'];
         $phone = $item['Phone'];
         $position = $item['Position'];
+
+        $check_photo = check_header($photo_url);
+        if($check_photo != 'image/jpeg'){
+            $photo_url = 'https://www.creol.ucf.edu/People/images/100x150Portrait/NoImage.jpg';
+        }
 
         echo "
                 <div class='col-lg-3 mb-3'>
