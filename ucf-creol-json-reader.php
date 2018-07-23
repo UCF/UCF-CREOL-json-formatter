@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: UCF-CREOL-SQL-Json-Reader
- * Version: 0.4.4
+ * Version: 0.4.5
  * Author: Raphael Miller for UCF CREOL
  * Description: This plugin collects information from a server with a json endpoint, and converts the json data to a
  * pretty format based on the Colleges requirements.
@@ -133,13 +133,13 @@ function ucf_creol_generic_shortcode($args ){
     $json_string = curl_url($result);
     $json_obj = jsonifyier($json_string);
 
-    var_dump($args);
+    //var_dump($args);
 
     switch ($args['stored_procedure']){
         case "WWWPublications":
             layout_publications($json_obj);
             break;
-        case "WWWDIrectory":
+        case "WWWDirectory":
             layout_people($json_obj);
             break;
         default:

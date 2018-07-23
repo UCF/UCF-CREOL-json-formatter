@@ -58,8 +58,15 @@ function layout_people($json){
 }
 
 function layout_publications($json_obj){
-    $pub_base_url = 'https://www.creol.ucf.edu/Research/Publications/';
 
+    //offline debug
+    $path = dirname(__DIR__);
+    $get_json_sample = file_get_contents( $path . '/tests/sample2.json');
+    $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
+    $json_obj = $parse_json;
+
+    $pub_base_url = 'https://www.creol.ucf.edu/Research/Publications/';
+    //var_dump($json_obj);
     echo '<h4>Publications</h4>';
     foreach ($json_obj as $json_item){
         //echo $json_item['Authors'];
