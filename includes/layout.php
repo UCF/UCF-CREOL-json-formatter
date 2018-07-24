@@ -15,7 +15,11 @@
  */
 
 
-
+/**
+ * layout_people() - a layout that is specifically designed for people json pulls
+ *
+ * @param $json object
+ */
 function layout_people($json){
 
     //offline debug
@@ -25,9 +29,11 @@ function layout_people($json){
     $json = $parse_json;
 
 
-
+    //begin loop for each json element
     echo "<div class='row'>";
     foreach ($json as $item){
+
+        //section off json items for later use.
         $photo_url = 'https://www.creol.ucf.edu/People/images/200x300Portrait/' . $item['PeopleID'] . '.jpg';
         $site_url = 'https://www.creol.ucf.edu/People/Details.aspx?PeopleID=' . $item['PeopleID'];
         $name = $item['FullName'];
@@ -36,11 +42,13 @@ function layout_people($json){
         $phone = $item['Phone'];
         $position = $item['Position'];
 
+        //checks if a photo exists, if not then generate no-image jpg.
         $check_photo = check_header($photo_url);
         if($check_photo != 'image/jpeg'){
             $photo_url = 'https://www.creol.ucf.edu/People/images/100x150Portrait/NoImage.jpg';
         }
 
+        //html generation
         echo "
                 <div class='col-lg-3 mb-3'>
                     <a href='$site_url'><img class='card' src='$photo_url'></a>
@@ -57,6 +65,11 @@ function layout_people($json){
     echo '</div>';
 }
 
+/**
+ * layout_publications() - layout for publications,
+ *
+ * @param $json_obj object
+ */
 function layout_publications($json_obj){
 
     //offline debug
@@ -65,11 +78,14 @@ function layout_publications($json_obj){
     $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
     $json_obj = $parse_json;
 
+    //url for publications database store.
     $pub_base_url = 'https://www.creol.ucf.edu/Research/Publications/';
-    //var_dump($json_obj);
+
+    //begin loop for json object elements
     echo '<h4>Publications</h4>';
     foreach ($json_obj as $json_item){
-        //echo $json_item['Authors'];
+
+        //section off json items for later use.
         $pdf_uri = $pub_base_url . $json_item['PublicationID'] . '.pdf';
         $pub_year = $json_item['PublicationYear'];
         $pub_month = DateTime::createFromFormat('!m', $json_item['PublicationMonth']);
@@ -78,14 +94,14 @@ function layout_publications($json_obj){
         $pub_title = $json_item['Title'];
         $pub_ref = $json_item['Reference'];
 
-        $header = get_headers($pdf_uri, 1);
+        $check_pdf_result = check_header($pdf_uri);
         //var_dump($header['Content-Type']);
 
         //$check_url_status = check_uri($pdf_uri);
-        if($header['Content-Type'] == 'application/pdf'){
+        if($check_pdf_result == 'application/pdf'){
             $pdf_button = "<button class='button btn-primary'><a href=\"$pdf_uri\">Download PDF</a></button>";
         } else {
-            $pdf_button = '<button class="disabled">PDF not available</button>';
+            $pdf_button = '<button class="button disabled">Not Available</button>';
         }
 
         echo "
