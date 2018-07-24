@@ -43,6 +43,7 @@ function SQL_DB_Connector(){
  *  delete later.
  *
  * @param $atts
+ * @deprecated
  */
 function display_json_shortcode($atts ){
     $a = shortcode_atts( array(
@@ -68,6 +69,7 @@ add_shortcode( 'display_json_gen_table', 'display_json_shortcode' );
  * the formatter prints the information in a pretty format for committee review at a later date.
  *
  * @param $atts array
+ * @deprecated
  */
 function ucf_creol_people_directory_shortcode($atts ){
     $a = shortcode_atts( array(
@@ -96,6 +98,7 @@ add_shortcode( 'ucf-creol-people-directory', 'ucf_creol_people_directory_shortco
  * ucf_creol_publications-shortcode() - shortcode gen for pub shortcode
  *
  * @param $args
+ * @deprecated ucf_creol_publications
  */
 function ucf_creol_publications_shortcode($args ){
     $a = shortcode_atts( array(
@@ -108,7 +111,7 @@ function ucf_creol_publications_shortcode($args ){
         'pagesize' => 3
     ), $args );
 
-    $result = build_uri_string_publications($a);
+    $result = build_uri_string($a);
     $json_string = curl_url($result);
     $json_obj = jsonifyier($json_string);
     $_POST['json_obj'] = $json_obj;
@@ -120,27 +123,41 @@ function ucf_creol_generic_shortcode($args ){
     $a = shortcode_atts( array(
         'base_uri' => 'https://api.creol.ucf.edu/SqltoJson.aspx',
         'stored_procedure' => 'WWWPublications',
-//        'typelist' => '3',      //STRING sep with commas.
-//        'year' => 0,
-//        'peopleid' => 0,
-//        'page' => 1,
-//        'pagesize' => 3,
-//        'grpid' => 0,
-//        'layout' => 'pub'
+        'layout' => 'default',
+        'typelist' => '3',      //STRING sep with commas.
+        'year' => 0,
+        'peopleid' => 0,
+        'page' => 1,
+        'pagesize' => 3,
+        'grpid' => 0,
     ), $args );
 
-    $result = build_uri_string_publications($a, $args);
-    $json_string = curl_url($result);
-    $json_obj = jsonifyier($json_string);
 
+
+    $result = build_uri_string($a, $args);
+
+    $json_string = curl_url($result);
+    //$json_obj = jsonifyier($json_string);
+    //$json_string = json_encode($json_string, JSON_PRETTY_PRINT);
+    $clean = json_clean($json_string);
+    //$json_obj = json_decode($clean);
+    //var_dump($json_obj);
+    //var_dump($json_string);
+    var_dump($clean);
+    echo json_last_error_msg();
+    echo '<br><br><br>';
     //var_dump($args);
+    //var_dump($result);
+    //var_dump($a);
 
     switch ($args['stored_procedure']){
         case "WWWPublications":
-            layout_publications($json_obj);
+            //layout_publications($json_obj);
+            //var_dump($json_obj);
             break;
         case "WWWDirectory":
-            layout_people($json_obj);
+            //layout_people($json_obj);
+            //var_dump($json_obj);
             break;
         default:
             echo 'Error: stored procedure is missing or invalid';

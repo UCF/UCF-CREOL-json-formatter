@@ -9,25 +9,40 @@
 /**
  * build_uri_string_publications() - builds the url string from the shortcode arguments list.
  * @param $shortcode_defaults
+ * @param $shortcode_args
  * @return string
  */
-
-
-
-function build_uri_string_publications($shortcode_defaults, $shortcode_args){
+function build_uri_string($shortcode_defaults, $shortcode_args){
     $url_concat = '';
-    $arr = array(key($shortcode_defaults) => $shortcode_defaults['base_uri']) + $shortcode_args;
+    //$arr = array(key($shortcode_defaults) => $shortcode_defaults['base_uri']) + $shortcode_args;
     //var_dump($arr);
-    end($arr);
-    $last_element = key($arr);
 
-    if($arr['stored_procedure'] == 'WWWDirectory'){
-        if(!array_key_exists('grpid', $arr)){
+    if(array_key_exists('layout', $shortcode_defaults)){
+        unset($shortcode_defaults['layout']);
+    }
+
+    //parse between WWWpublications arguments and WWWDirectory arguments
+    if($shortcode_defaults['stored_procedure'] == 'WWWDirectory'){
+
+        unset($shortcode_defaults['typelist']);
+        unset($shortcode_defaults['year']);
+        unset($shortcode_defaults['peopleid']);
+        unset($shortcode_defaults['page']);
+        unset($shortcode_defaults['pagesize']);
+
+        if(!array_key_exists('grpid', $shortcode_defaults)){
             return 'argument expects group id value';
+        }
+    } elseif ($shortcode_defaults['stored_procedure'] == 'WWWPublications'){
+        if(array_key_exists('grpid', $shortcode_defaults)){
+            unset($shortcode_defaults['grpid']);
         }
     }
 
-    foreach ($arr as $k => $v){
+    end($shortcode_defaults);
+    $last_element = key($shortcode_defaults);
+
+    foreach ($shortcode_defaults as $k => $v){
         if($k == 'base_uri'){
             $url_concat = $url_concat . $v . "?";
         } else if($k == 'stored_procedure'){
@@ -103,6 +118,27 @@ function curl_url($url){
 
 function jsonifyier($result){
     //var_dump(json_decode($result, JSON_PRETTY_PRINT));
-    //echo json_last_error();
-    return json_decode($result, JSON_PRETTY_PRINT);
+    echo json_last_error();
+    return json_decode($result);
+}
+
+function json_clean($json){
+    // This will remove unwanted characters.
+// Check http://www.php.net/chr for details
+
+    $checkLogin = $json;
+    for ($i = 0; $i <= 31; ++$i) {
+        $checkLogin = str_replace(chr($i), "", $checkLogin);
+    }
+    $checkLogin = str_replace(chr(127), "", $checkLogin);
+
+// This is the most common part
+// Some file begins with 'efbbbf' to mark the beginning of the file. (binary level)
+// here we detect it and we remove it, basically it's the first 3 characters
+    if (0 === strpos(bin2hex($checkLogin), 'efbbbf')) {
+        $checkLogin = substr($checkLogin, 3);
+    }
+
+    $checkLogin = json_decode($checkLogin);
+    print_r($checkLogin);
 }

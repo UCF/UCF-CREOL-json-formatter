@@ -23,10 +23,10 @@
 function layout_people($json){
 
     //offline debug
-    $path = dirname(__DIR__);
-    $get_json_sample = file_get_contents( $path . '/tests/sample1.json');
-    $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
-    $json = $parse_json;
+//    $path = dirname(__DIR__);
+//    $get_json_sample = file_get_contents( $path . '/tests/sample1.json');
+//    $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
+//    $json = $parse_json;
 
 
     //begin loop for each json element
@@ -73,14 +73,15 @@ function layout_people($json){
 function layout_publications($json_obj){
 
     //offline debug
-    $path = dirname(__DIR__);
-    $get_json_sample = file_get_contents( $path . '/tests/sample2.json');
-    $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
-    $json_obj = $parse_json;
+//    $path = dirname(__DIR__);
+//    $get_json_sample = file_get_contents( $path . '/tests/sample2.json');
+//    $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
+//    $json_obj = $parse_json;
 
     //url for publications database store.
     $pub_base_url = 'https://www.creol.ucf.edu/Research/Publications/';
 
+    //echo $json_obj;
     //begin loop for json object elements
     echo '<h4>Publications</h4>';
     foreach ($json_obj as $json_item){
