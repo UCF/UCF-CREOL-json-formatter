@@ -15,6 +15,7 @@
 
 require_once("includes/utils.php");
 require_once("includes/layout.php");
+require_once ("includes/json.php");
 
 add_action( 'admin_menu', 'UCF-CREOL_SQL_Json_Reader' );
 
@@ -136,19 +137,28 @@ function ucf_creol_generic_shortcode($args ){
 
     $result = build_uri_string($a, $args);
 
-    $json_string = curl_url($result);
-    //$json_obj = jsonifyier($json_string);
-    //$json_string = json_encode($json_string, JSON_PRETTY_PRINT);
-    $clean = json_clean($json_string);
-    //$json_obj = json_decode($clean);
-    //var_dump($json_obj);
-    //var_dump($json_string);
-    var_dump($clean);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL, $result);
+    $result_curl = curl_exec($ch);
+    curl_close($ch);
+
+
+    $json = "{ \"response\": " . $result_curl . "}";
+    $obj = json_decode($result_curl, JSON_PRETTY_PRINT);
+    var_dump($obj);
     echo json_last_error_msg();
-    echo '<br><br><br>';
-    //var_dump($args);
-    //var_dump($result);
-    //var_dump($a);
+
+    $my_file = 'sample4.json';
+    $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
+    $data = strip_tags($result_curl);
+    fwrite($handle, $data);
+
+    $handler = fopen($my_file, 'r');
+    $data = fread($handler, filesize($my_file));
+    $data = json_decode($data);
+    var_dump($data);
 
     switch ($args['stored_procedure']){
         case "WWWPublications":

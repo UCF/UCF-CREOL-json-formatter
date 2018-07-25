@@ -142,3 +142,10 @@ function json_clean($json){
     $checkLogin = json_decode($checkLogin);
     print_r($checkLogin);
 }
+
+function removeBOM($data) {
+    if (0 === strpos(bin2hex($data), 'efbbbf')) {
+        return substr($data, 3);
+    }
+    return $data;
+}
