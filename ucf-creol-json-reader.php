@@ -131,6 +131,7 @@ function ucf_creol_generic_shortcode($args ){
         'page' => 1,
         'pagesize' => 3,
         'grpid' => 0,
+        'debug' => false
     ), $args );
 
 
@@ -140,16 +141,37 @@ function ucf_creol_generic_shortcode($args ){
 
     $json = strip_tags($curl_api);
     $obj = json_decode($json, JSON_PRETTY_PRINT);
-    if($obj == null) {
-        echo json_last_error_msg();
+
+    if($a['debug'] == true){
+        echo '<pre><code>';
+        echo "json error msg: " . json_last_error_msg() . "<br>";
+        echo "curl target: $result <br><br>";
+        foreach ($obj as $response){
+            echo 'response : <br>';
+            foreach($response as $array){
+                echo "    Array : <br>";
+                foreach ($array as $item => $value){
+                    echo "        $item : $value <br>";
+                }
+            }
+        }
+        echo '</code></pre>';
     }
 
-    switch ($args['stored_procedure']){
-        case "WWWPublications":
+    switch ($a['layout']){
+        case "publication":
             layout_publications($obj);
             break;
-        case "WWWDirectory":
+        case "people":
             layout_people($obj);
+            break;
+        case 'default':
+            if($a['stored_procedure'] == 'WWWPublications'){
+                layout_publications($obj);
+            }
+            if($a['stored_procedure'] == 'WWWDirectory'){
+                layout_people($obj);
+            }
             break;
         default:
             echo 'Error: stored procedure is missing or invalid';

@@ -81,7 +81,7 @@ function layout_publications($json_obj){
     //url for publications database store.
     $pub_base_url = 'https://www.creol.ucf.edu/Research/Publications/';
 
-    var_dump($json_obj);
+    //var_dump($json_obj);
 
 
     //echo $json_obj;

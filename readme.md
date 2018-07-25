@@ -21,6 +21,9 @@ N/A
 
 ## Changelog ##
 
+### 0.4.7 ###
+* new args
+
 ### 0.4.3 ###
 
 * added generic plugin shortcode to list of shortcode. will deprecate others in future version.   
@@ -54,6 +57,12 @@ None
 ## Development & Contributing ##
 
 N/A
+
+## Custom Shortcode Arguments ##
+
+Several shortcode arguments correspond to the query value that it is allocated for. For example: 
+* [ucf-creol] will provide the default loadout
+* [ucf-creol stored_procedure='WWWPublications'] will set the stored procedure to the publications json. 
 
 ### Wishlist/TODOs ###
 * Allow more functionality for various edge case solutions for the database. 

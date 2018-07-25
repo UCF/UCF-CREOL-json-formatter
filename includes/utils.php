@@ -17,8 +17,12 @@ function build_uri_string($shortcode_defaults, $shortcode_args){
     //$arr = array(key($shortcode_defaults) => $shortcode_defaults['base_uri']) + $shortcode_args;
     //var_dump($arr);
 
+    //non-query arguments
     if(array_key_exists('layout', $shortcode_defaults)){
         unset($shortcode_defaults['layout']);
+    }
+    if(array_key_exists('debug', $shortcode_defaults)){
+        unset($shortcode_defaults['debug']);
     }
 
     //parse between WWWpublications arguments and WWWDirectory arguments
