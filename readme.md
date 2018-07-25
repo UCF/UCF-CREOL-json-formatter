@@ -23,6 +23,7 @@ N/A
 
 ### 0.4.7 ###
 * new args
+* new layout for non-image formats 
 
 ### 0.4.3 ###
 
@@ -63,6 +64,18 @@ N/A
 Several shortcode arguments correspond to the query value that it is allocated for. For example: 
 * [ucf-creol] will provide the default loadout
 * [ucf-creol stored_procedure='WWWPublications'] will set the stored procedure to the publications json. 
+
+Current custom argument list includes: 
+* base_uri (required) - base uri of API in CREOL database
+* stored_procedure (required) - specify the type of stored procedure from the CREOL database
+* layout (optional) - layout for display
+* typelist (optional) - type of publication
+* year (optional) - year of publication
+* peopleid (optional) - person id for publications
+* page (optional) - 
+* pagesize (optional) - for publications sets the anmount of query values returned
+* grpid (required for people) - from stored procedure specifies the group id for people group within CREOL
+* debug (optional) - shows debug of results from api call
 
 ### Wishlist/TODOs ###
 * Allow more functionality for various edge case solutions for the database. 
