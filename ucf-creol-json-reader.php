@@ -136,49 +136,25 @@ function ucf_creol_generic_shortcode($args ){
 
 
     $result = build_uri_string($a, $args);
+    $curl_api = curl_api($result);
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_URL, $result);
-    $result_curl = curl_exec($ch);
-    curl_close($ch);
-
-
-    //$json = "{ \"response\": " . $result_curl . "}";
-    $json = strip_tags($result_curl);
+    $json = strip_tags($curl_api);
     $obj = json_decode($json, JSON_PRETTY_PRINT);
-    //var_dump($obj);
-    $data = strip_tags($result_curl);
     if($obj == null) {
         echo json_last_error_msg();
     }
 
-//    $my_file = 'sample4.json';
-//    $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
-//
-//    fwrite($handle, $data);
-//
-//    $handler = fopen($my_file, 'r');
-//    $data = fread($handler, filesize($my_file));
-//    $data = json_decode($data);
-//    var_dump($data);
-
     switch ($args['stored_procedure']){
         case "WWWPublications":
             layout_publications($obj);
-            //var_dump($json_obj);
             break;
         case "WWWDirectory":
             layout_people($obj);
-            //var_dump($json_obj);
             break;
         default:
             echo 'Error: stored procedure is missing or invalid';
             break;
     }
-
-    //layout_people($json_obj);
 }
 add_shortcode( 'ucf-creol', 'ucf_creol_generic_shortcode' );
 

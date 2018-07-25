@@ -149,3 +149,14 @@ function removeBOM($data) {
     }
     return $data;
 }
+
+function curl_api($result){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL, $result);
+    $result_curl = curl_exec($ch);
+    curl_close($ch);
+
+    return $result_curl;
+}
