@@ -18,7 +18,7 @@
 /**
  * layout_people() - a layout that is specifically designed for people json pulls
  *
- * @param $json object
+ * @param $json_obj
  */
 function layout_people($json_obj){
 
@@ -136,10 +136,15 @@ function display_search(){
 
 }
 
-function non_image_layout(){
+function non_image_layout($json_obj){
 
-}
-
-function image_layout(){
-
+    foreach ($json_obj as $json_arr) {
+        foreach ($json_arr as $json_item) {
+            echo "<ul>";
+            foreach ($json_item as $json_index => $json_value){
+                echo "<li>$json_index : $json_value</li>";
+            }
+            echo "</ul>";
+        }
+    }
 }

@@ -35,6 +35,7 @@ function build_uri_string($shortcode_defaults, $shortcode_args){
         unset($shortcode_defaults['pagesize']);
 
         if(!array_key_exists('grpid', $shortcode_defaults)){
+            echo 'stored procedure expects grpid value in shortcode argument';
             return 'argument expects group id value';
         }
     } elseif ($shortcode_defaults['stored_procedure'] == 'WWWPublications'){
@@ -163,4 +164,20 @@ function curl_api($result){
     curl_close($ch);
 
     return $result_curl;
+}
+
+function debug_print($obj, $result){
+    echo '<pre><code>';
+    echo "json error msg: " . json_last_error_msg() . "<br>";
+    echo "curl target: $result <br><br>";
+    foreach ($obj as $response){
+        echo 'response : <br>';
+        foreach($response as $array){
+            echo "    Array : <br>";
+            foreach ($array as $item => $value){
+                echo "        $item : $value <br>";
+            }
+        }
+    }
+    echo '</code></pre>';
 }

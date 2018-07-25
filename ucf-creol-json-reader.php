@@ -134,36 +134,27 @@ function ucf_creol_generic_shortcode($args ){
         'debug' => false
     ), $args );
 
-
-
+    //json parsing and cleaning
     $result = build_uri_string($a, $args);
     $curl_api = curl_api($result);
-
     $json = strip_tags($curl_api);
     $obj = json_decode($json, JSON_PRETTY_PRINT);
 
+    //set flag for debug mode
     if($a['debug'] == true){
-        echo '<pre><code>';
-        echo "json error msg: " . json_last_error_msg() . "<br>";
-        echo "curl target: $result <br><br>";
-        foreach ($obj as $response){
-            echo 'response : <br>';
-            foreach($response as $array){
-                echo "    Array : <br>";
-                foreach ($array as $item => $value){
-                    echo "        $item : $value <br>";
-                }
-            }
-        }
-        echo '</code></pre>';
+        debug_print($obj, $result);
     }
 
+    //choose the layout based on layout arg or stored procedure
     switch ($a['layout']){
         case "publication":
             layout_publications($obj);
             break;
         case "people":
             layout_people($obj);
+            break;
+        case "non-image":
+            non_image_layout($obj);
             break;
         case 'default':
             if($a['stored_procedure'] == 'WWWPublications'){
