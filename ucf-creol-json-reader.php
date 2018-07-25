@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: UCF-CREOL-SQL-Json-Reader
- * Version: 0.4.6
+ * Version: 0.4.7
  * Author: Raphael Miller for UCF CREOL
  * Description: This plugin collects information from a server with a json endpoint, and converts the json data to a
  * pretty format based on the Colleges requirements.
@@ -145,28 +145,32 @@ function ucf_creol_generic_shortcode($args ){
     curl_close($ch);
 
 
-    $json = "{ \"response\": " . $result_curl . "}";
-    $obj = json_decode($result_curl, JSON_PRETTY_PRINT);
-    var_dump($obj);
-    echo json_last_error_msg();
-
-    $my_file = 'sample4.json';
-    $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
+    //$json = "{ \"response\": " . $result_curl . "}";
+    $json = strip_tags($result_curl);
+    $obj = json_decode($json, JSON_PRETTY_PRINT);
+    //var_dump($obj);
     $data = strip_tags($result_curl);
-    fwrite($handle, $data);
+    if($obj == null) {
+        echo json_last_error_msg();
+    }
 
-    $handler = fopen($my_file, 'r');
-    $data = fread($handler, filesize($my_file));
-    $data = json_decode($data);
-    var_dump($data);
+//    $my_file = 'sample4.json';
+//    $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
+//
+//    fwrite($handle, $data);
+//
+//    $handler = fopen($my_file, 'r');
+//    $data = fread($handler, filesize($my_file));
+//    $data = json_decode($data);
+//    var_dump($data);
 
     switch ($args['stored_procedure']){
         case "WWWPublications":
-            //layout_publications($json_obj);
+            layout_publications($obj);
             //var_dump($json_obj);
             break;
         case "WWWDirectory":
-            //layout_people($json_obj);
+            layout_people($obj);
             //var_dump($json_obj);
             break;
         default:

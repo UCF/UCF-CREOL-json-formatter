@@ -20,7 +20,7 @@
  *
  * @param $json object
  */
-function layout_people($json){
+function layout_people($json_obj){
 
     //offline debug
 //    $path = dirname(__DIR__);
@@ -28,28 +28,27 @@ function layout_people($json){
 //    $parse_json = json_decode($get_json_sample, JSON_PRETTY_PRINT);
 //    $json = $parse_json;
 
-
     //begin loop for each json element
     echo "<div class='row'>";
-    foreach ($json as $item){
+    foreach ($json_obj as $json_arr){
+        foreach ($json_arr as $json_item) {
+            //section off json items for later use.
+            $photo_url = 'https://www.creol.ucf.edu/People/images/200x300Portrait/' . $json_item['PeopleID'] . '.jpg';
+            $site_url = 'https://www.creol.ucf.edu/People/Details.aspx?PeopleID=' . $json_item['PeopleID'];
+            $name = $json_item['FullName'];
+            $room_no = $json_item['Location'];
+            $email = $json_item['Email'];
+            $phone = $json_item['Phone'];
+            $position = $json_item['Position'];
 
-        //section off json items for later use.
-        $photo_url = 'https://www.creol.ucf.edu/People/images/200x300Portrait/' . $item['PeopleID'] . '.jpg';
-        $site_url = 'https://www.creol.ucf.edu/People/Details.aspx?PeopleID=' . $item['PeopleID'];
-        $name = $item['FullName'];
-        $room_no = $item['Location'];
-        $email = $item['Email'];
-        $phone = $item['Phone'];
-        $position = $item['Position'];
+            //checks if a photo exists, if not then generate no-image jpg.
+            $check_photo = check_header($photo_url);
+            if ($check_photo != 'image/jpeg') {
+                $photo_url = 'https://www.creol.ucf.edu/People/images/100x150Portrait/NoImage.jpg';
+            }
 
-        //checks if a photo exists, if not then generate no-image jpg.
-        $check_photo = check_header($photo_url);
-        if($check_photo != 'image/jpeg'){
-            $photo_url = 'https://www.creol.ucf.edu/People/images/100x150Portrait/NoImage.jpg';
-        }
-
-        //html generation
-        echo "
+            //html generation
+            echo "
                 <div class='col-lg-3 mb-3'>
                     <a href='$site_url'><img class='card' src='$photo_url'></a>
                 </div>
@@ -60,7 +59,8 @@ function layout_people($json){
                     <p>$phone</p>
                     <a href='mailto:$email'><p>$email</p></a>
                 </div>
-        ";
+            ";
+        }
     }
     echo '</div>';
 }
@@ -81,31 +81,35 @@ function layout_publications($json_obj){
     //url for publications database store.
     $pub_base_url = 'https://www.creol.ucf.edu/Research/Publications/';
 
+    var_dump($json_obj);
+
+
     //echo $json_obj;
     //begin loop for json object elements
     echo '<h4>Publications</h4>';
-    foreach ($json_obj as $json_item){
+    foreach ($json_obj as $json_arr) {
+        foreach ($json_arr as $json_item) {
 
-        //section off json items for later use.
-        $pdf_uri = $pub_base_url . $json_item['PublicationID'] . '.pdf';
-        $pub_year = $json_item['PublicationYear'];
-        $pub_month = DateTime::createFromFormat('!m', $json_item['PublicationMonth']);
-        $month_name = $pub_month->format('F');
-        $pub_authors = $json_item['Authors'];
-        $pub_title = $json_item['Title'];
-        $pub_ref = $json_item['Reference'];
+            //section off json items for later use.
+            $pdf_uri = $pub_base_url . $json_item['PublicationID'] . '.pdf';
+            $pub_year = $json_item['PublicationYear'];
+            $pub_month = DateTime::createFromFormat('!m', $json_item['PublicationMonth']);
+            $month_name = $pub_month->format('F');
+            $pub_authors = $json_item['Authors'];
+            $pub_title = $json_item['Title'];
+            $pub_ref = $json_item['Reference'];
 
-        $check_pdf_result = check_header($pdf_uri);
-        //var_dump($header['Content-Type']);
+            $check_pdf_result = check_header($pdf_uri);
+            //var_dump($header['Content-Type']);
 
-        //$check_url_status = check_uri($pdf_uri);
-        if($check_pdf_result == 'application/pdf'){
-            $pdf_button = "<button class='button btn-primary'><a href=\"$pdf_uri\">Download PDF</a></button>";
-        } else {
-            $pdf_button = '<button class="button disabled">Not Available</button>';
-        }
+            //$check_url_status = check_uri($pdf_uri);
+            if ($check_pdf_result == 'application/pdf') {
+                $pdf_button = "<button class='button btn-primary'><a href=\"$pdf_uri\">Download PDF</a></button>";
+            } else {
+                $pdf_button = '<button class="button disabled">Not Available</button>';
+            }
 
-        echo "
+            echo "
                 <div class='row'>
                     <div class='col-sm-2'>
                         $pdf_button
@@ -123,7 +127,8 @@ function layout_publications($json_obj){
                 </div>
                 <p></p>
             ";
-        //echo "$key = $value<br><br>";
+            //echo "$key = $value<br><br>";
+        }
     }
 }
 
