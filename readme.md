@@ -66,7 +66,7 @@ Several shortcode arguments correspond to the query value that it is allocated f
 * [ucf-creol stored_procedure='WWWPublications'] will set the stored procedure to the publications json. 
 
 Current custom argument list includes: 
-* base_uri (required) - base uri of API in CREOL database
+* base_uri (required/hardcoded) - base uri of API in CREOL database
 * stored_procedure (required) - specify the type of stored procedure from the CREOL database
 * layout (optional) - layout for display
 * typelist (optional) - type of publication
