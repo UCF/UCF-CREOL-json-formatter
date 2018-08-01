@@ -72,7 +72,7 @@ Current custom argument list includes:
 * typelist (optional) - type of publication
 * year (optional) - year of publication
 * peopleid (optional) - person id for publications
-* page (optional) - 
+* page (optional) - deciedes the length of pages
 * pagesize (optional) - for publications sets the anmount of query values returned
 * grpid (required for people) - from stored procedure specifies the group id for people group within CREOL
 * debug (optional) - shows debug of results from api call
